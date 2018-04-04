@@ -1,12 +1,13 @@
 Spree::Core::Engine.routes.draw do
   devise_for :spree_user,
              :class_name => 'Spree::User',
-             :controllers => { :sessions => 'spree/user_sessions',
+             :controllers => { :omniauth_callbacks: "spree/omniauth_callbacks",
+                               :sessions => 'spree/user_sessions',
                                :registrations => 'spree/user_registrations',
                                :passwords => 'spree/user_passwords' },
-             :skip => [:unlocks, :omniauth_callbacks],
+             :skip => [:unlocks],
              :path_names => { :sign_out => 'logout' },
-             :path_prefix => :user
+             :path => 'users'
 end
 
 Spree::Core::Engine.routes.prepend do
@@ -24,6 +25,8 @@ Spree::Core::Engine.routes.prepend do
     post '/password/recover' => 'user_passwords#create', :as => :reset_password
     get '/password/change' => 'user_passwords#edit', :as => :edit_password
     put '/password/change' => 'user_passwords#update', :as => :update_password
+    
+    post "spree_users/sign_up_social", to: "user_registrations#create_social", as: "social_user_registration"
   end
 
   match '/checkout/registration' => 'checkout#registration', :via => :get, :as => :checkout_registration
