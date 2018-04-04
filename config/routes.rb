@@ -1,7 +1,7 @@
 Spree::Core::Engine.routes.draw do
   devise_for :spree_user,
              :class_name => 'Spree::User',
-             :controllers => { :omniauth_callbacks: "spree/omniauth_callbacks",
+             :controllers => { :omniauth_callbacks => "spree/omniauth_callbacks",
                                :sessions => 'spree/user_sessions',
                                :registrations => 'spree/user_registrations',
                                :passwords => 'spree/user_passwords' },
