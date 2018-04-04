@@ -7,7 +7,7 @@ Spree::Core::Engine.routes.draw do
                                :passwords => 'spree/user_passwords' },
              :skip => [:unlocks],
              :path_names => { :sign_out => 'logout' },
-             :path_prefix => '/users'
+             :path => 'users'
 end
 
 Spree::Core::Engine.routes.prepend do
