@@ -26,7 +26,7 @@ Spree::Core::Engine.routes.prepend do
     get '/password/change' => 'user_passwords#edit', :as => :edit_password
     put '/password/change' => 'user_passwords#update', :as => :update_password
     
-    post "spree_users/sign_up_social", to: "user_registrations#create_social", as: "social_user_registration"
+    post "/users/sign_up_social", to: "user_registrations#create_social", as: "social_user_registration"
   end
 
   match '/checkout/registration' => 'checkout#registration', :via => :get, :as => :checkout_registration
