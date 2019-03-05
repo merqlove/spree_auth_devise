@@ -1,5 +1,5 @@
 Spree::Core::Engine.add_routes do
-  Spree::Auth::Engine.devise_routes.call if Spree::Auth::Engine.devise_routes.respond_to?(:call)
+  Spree::Auth::Engine.devise_routes.call(self) if Spree::Auth::Engine.devise_routes.respond_to?(:call)
 
   devise_scope :spree_user do
     get '/login' => 'user_sessions#new', :as => :login

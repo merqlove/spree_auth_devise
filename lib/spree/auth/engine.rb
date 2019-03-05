@@ -25,8 +25,8 @@ module Spree
       end
 
       def self.devise_routes
-        @devise_routes || -> {
-          devise_for :spree_user, {
+        @devise_routes || ->(routes) {
+          routes.devise_for :spree_user, {
               class_name: 'Spree::User',
               controllers: { sessions: 'spree/user_sessions',
                              registrations: 'spree/user_registrations',
