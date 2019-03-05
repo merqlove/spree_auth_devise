@@ -1,15 +1,5 @@
 Spree::Core::Engine.add_routes do
-  devise_for :spree_user,
-             class_name: 'Spree::User',
-             controllers: { sessions: 'spree/user_sessions',
-                               registrations: 'spree/user_registrations',
-                               passwords: 'spree/user_passwords',
-                               confirmations: 'spree/user_confirmations' },
-             skip: [:unlocks, :omniauth_callbacks],
-             path_names: { sign_out: 'logout' },
-             path_prefix: :user
-
-  resources :users, only: [:edit, :update]
+  Spree::Auth::Engine.devise_routes.call if Spree::Auth::Engine.devise_routes.respond_to?(:call)
 
   devise_scope :spree_user do
     get '/login' => 'user_sessions#new', :as => :login
