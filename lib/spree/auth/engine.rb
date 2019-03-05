@@ -24,23 +24,21 @@ module Spree
         end
       end
 
-      def self.devise_routes
-        @devise_routes || ->(routes) {
-          routes.devise_for :spree_user, {
-              class_name: 'Spree::User',
-              controllers: { sessions: 'spree/user_sessions',
-                             registrations: 'spree/user_registrations',
-                             passwords: 'spree/user_passwords',
-                             confirmations: 'spree/user_confirmations' },
-              skip: [:unlocks, :omniauth_callbacks],
-              path_names: { sign_out: 'logout' },
-              path_prefix: :user
-          }
+      def self.devise_user_config
+        @devise_user_config || {
+            class_name: 'Spree::User',
+            controllers: { sessions: 'spree/user_sessions',
+                           registrations: 'spree/user_registrations',
+                           passwords: 'spree/user_passwords',
+                           confirmations: 'spree/user_confirmations' },
+            skip: [:unlocks, :omniauth_callbacks],
+            path_names: { sign_out: 'logout' },
+            path_prefix: :user
         }
       end
 
-      def self.devise_routes=(value)
-        @devise_routes = value
+      def self.devise_user_config=(value)
+        @devise_user_config = value
       end
 
       def self.activate
