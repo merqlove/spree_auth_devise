@@ -76,4 +76,17 @@ RSpec.describe Spree::User, type: :model do
       expect(Spree::User.devise_modules).to_not include(:confirmable)
     end
   end
+
+  describe "omniauthable", reload_user: true do
+    it "is omniauthable if the omniauthable option is enabled" do
+      set_omniauthable_option(true)
+      expect(Spree::User.devise_modules).to include(:omniauthable)
+      set_omniauthable_option(false)
+    end
+
+    it "is not omniauthable if the omniauthable option is disabled" do
+      set_omniauthable_option(false)
+      expect(Spree::User.devise_modules).to_not include(:omniauthable)
+    end
+  end
 end

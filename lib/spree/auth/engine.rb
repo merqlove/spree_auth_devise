@@ -25,13 +25,14 @@ module Spree
       end
 
       def self.devise_user_config
-        @devise_user_config || {
+        return @devise_user_config if @devise_user_config
+        {
             class_name: 'Spree::User',
             controllers: { sessions: 'spree/user_sessions',
                            registrations: 'spree/user_registrations',
                            passwords: 'spree/user_passwords',
                            confirmations: 'spree/user_confirmations' },
-            skip: [:unlocks, :omniauth_callbacks],
+            skip: Spree::Auth::Config[:omniauthable] ? [:unlocks] : [:unlocks, :omniauth_callbacks],
             path_names: { sign_out: 'logout' },
             path_prefix: :user
         }

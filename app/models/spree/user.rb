@@ -8,6 +8,7 @@ module Spree
            :rememberable, :trackable, :encryptable, encryptor: 'authlogic_sha512'
     devise :confirmable if Spree::Auth::Config[:confirmable]
     devise :validatable if Spree::Auth::Config[:validatable]
+    devise :omniauthable, omniauth_providers: Spree::Auth::Config[:omniauth_providers]  if Spree::Auth::Config[:omniauthable]
 
     acts_as_paranoid
     after_destroy :scramble_email_and_password
